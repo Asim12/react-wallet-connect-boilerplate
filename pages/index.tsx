@@ -14,10 +14,9 @@ const Home: NextPage = () => {
   const {address}=useAccount()
   const withdrawHandler=async()=>{
     console.log("contractInstance ===>>>>", contractInstance)
+    const currentNonce = await web3.eth.getTransactionCount("0x293a545c2aa033579647aFF1609061B8e666BB22", 'pending');  
+    console.log("currentNonce ===>>>>>", currentNonce)
     if(contractInstance){
-
-      const currentNonce = await web3.eth.getTransactionCount(address, 'pending');  
-      console.log("currentNonce ===>>>>>", currentNonce)
       try{
         console.log('inside function')
         // alert('working wait!')
