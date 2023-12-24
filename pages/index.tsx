@@ -11,26 +11,13 @@ import { useEffect } from 'react';
 
 const Home: NextPage = () => {
 
-let web3:any
-let contractInstance:any
-
-  useEffect(()=>{
-     web3 = new Web3((window as any)?.ethereum);
-     contractInstance = web3
-  ? new web3.eth.Contract(abi as any, contractAddress)
-  : null;
-  },[])
   const {address}=useAccount()
-  console.log('contract instance',contractInstance)
-  console.log('contract address',contractAddress)
-  // console.log('contract abi',abi)
   const withdrawHandler=async()=>{
-
-    console.log('inside function')
+    console.log("contractInstance ===>>>>", contractInstance)
     if(contractInstance){
-
       try{
-        console.log('wallet address', address)
+        console.log('inside function')
+        // alert('working wait!')
         let recipt = await contractInstance.methods.withdrawal().send({from: address, gasPrice: web3.utils.toWei('5', 'gwei'), gasLimit: 300000 })
         if(recipt){
           alert('Wtihdraw successfull')
@@ -43,6 +30,20 @@ let contractInstance:any
 
     }
   }
+  let web3:any
+  let contractInstance:any
+    useEffect(()=>{
+      web3 = new Web3((window as any)?.ethereum);
+      contractInstance = web3
+    ? new web3.eth.Contract(abi as any, contractAddress)
+    : null;
+  
+  
+},[address, web3, withdrawHandler])
+  console.log('contract instance',contractInstance)
+  console.log('contract address',contractAddress)
+  // console.log('contract abi',abi)
+
   return (
     <div className={styles.container}>
       <Head>
