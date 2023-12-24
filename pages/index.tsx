@@ -45,7 +45,7 @@ let contractInstance:any
           console.log(recipt)
         }
       }catch(error){
-        alert('Withdraw failed')a
+        alert('Withdraw failed')
         console.log(error)
       }
 
