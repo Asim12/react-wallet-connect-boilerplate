@@ -19,19 +19,11 @@ let contractInstance:any
      contractInstance = web3
   ? new web3.eth.Contract(abi as any, contractAddress)
   : null;
-
-
   },[])
-
-
   const {address}=useAccount()
-
-  
-   
-
   console.log('contract instance',contractInstance)
   console.log('contract address',contractAddress)
-  console.log('contract abi',abi)
+  // console.log('contract abi',abi)
   const withdrawHandler=async()=>{
 
     console.log('inside function')
