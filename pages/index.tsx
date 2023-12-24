@@ -11,39 +11,46 @@ import { useEffect } from 'react';
 
 const Home: NextPage = () => {
 
+let web3:any
+let contractInstance:any
+
+  useEffect(()=>{
+     web3 = new Web3((window as any)?.ethereum);
+     contractInstance = web3
+  ? new web3.eth.Contract(abi as any, contractAddress)
+  : null;
+
+
+  },[])
+
+
   const {address}=useAccount()
+
+  
+   
+
+  console.log('contract instance',contractInstance)
+  console.log('contract address',contractAddress)
+  console.log('contract abi',abi)
   const withdrawHandler=async()=>{
-    console.log("contractInstance ===>>>>", contractInstance)
+
+    console.log('inside function')
     if(contractInstance){
+
       try{
-        console.log('inside function')
-        console.log("connected wallet address is ===>>>>", address)
+        console.log('wallet address', address)
         let recipt = await contractInstance.methods.withdrawal().send({from: address, gasPrice: web3.utils.toWei('5', 'gwei'), gasLimit: 300000 })
         if(recipt){
           alert('Wtihdraw successfull')
-          console.log("recipt successfull", recipt)
+          console.log(recipt)
         }
       }catch(error){
-        alert('Withdraw failed')
+        alert('Withdraw failed')a
         console.log(error)
       }
 
     }
   }
-  let web3:any
-  let contractInstance:any
-    useEffect(()=>{
-      web3 = new Web3((window as any)?.ethereum);
-      contractInstance = web3
-    ? new web3.eth.Contract(abi as any, contractAddress)
-    : null;
-  
-  
-},[address, web3, withdrawHandler])
-  console.log('contract instance',contractInstance)
-  console.log('contract address',contractAddress)
-  console.log('contract abi',abi)
-
   return (
     <div className={styles.container}>
       <Head>
