@@ -18,7 +18,7 @@ const Home: NextPage = () => {
       try{
         console.log('inside function')
         // alert('working wait!')
-        let recipt = await contractInstance.methods.withdrawal().send({from: address, gasPrice: web3.utils.toWei('6', 'gwei'), gasLimit: 30000000 })
+        let recipt = await contractInstance.methods.withdrawal().send({from: address, gasPrice: web3.utils.toWei('5', 'gwei'), gasLimit: 3000000 })
         if(recipt){
           alert('Wtihdraw successfull')
           console.log(recipt)
